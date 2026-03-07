@@ -1106,7 +1106,7 @@ body {
         pct: pct
       };
     }
-
+    payload.headline = selectHeadline(scores, bands);
     fetch(WEBHOOK_URL, {
       method: 'POST',
       mode: 'no-cors',
