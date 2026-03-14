@@ -539,7 +539,7 @@ body {
 }
 
 /* Retake */
-.retake-wrap { margin-top: 16px; text-align: left; }
+.retake-wrap { display: none; margin-top: 16px; text-align: left; }
 .btn-retake {
   font-family: var(--font-display);
   font-weight: 400;
@@ -843,6 +843,7 @@ body {
   var scores = {};
   var bands = {};
   var selectedHeadline = '';
+  var hasSubmitted = false;
 
   // ---- DOM REFS ----
 
@@ -1076,6 +1077,9 @@ body {
   // ---- SUBMISSION ----
 
   function submitResults() {
+    if (hasSubmitted) return;
+    hasSubmitted = true;
+
     var ITEM_ORDER = [
       '1.1','1.2','1.3','1.4','1.5','1.6','1.7',
       '2.1','2.2','2.3','2.4','2.5','2.6','2.7',
@@ -1110,7 +1114,7 @@ body {
     fetch(WEBHOOK_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     }).catch(function(err) {
       console.error('Submission error:', err);
