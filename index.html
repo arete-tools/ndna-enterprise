@@ -553,6 +553,30 @@ body {
 .btn-retake:hover { color: var(--text-secondary); }
 .btn-retake:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 
+/* Save */
+.save-wrap { margin-top: 16px; text-align: left; }
+.btn-save {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s ease;
+}
+.btn-save:hover { color: var(--text-primary); }
+.btn-save:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.save-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 /* Footer */
 .footer {
   text-align: center;
@@ -605,6 +629,7 @@ body {
   .balanced-block { padding: 16px 20px 20px; }
   .summary-header { padding: 16px 20px; }
   .summary-body { padding: 0 20px 20px; }
+  .btn-save { font-size: 0.8125rem; }
 }
 
 /* Reduced motion */
@@ -618,12 +643,69 @@ body {
 
 /* Print */
 @media print {
-  .topbar, .progress-bar, .q-nav, .btn-retake { display: none !important; }
+  /* Hide non-content elements */
+  .topbar, .progress-bar, .q-nav, .retake-wrap, .save-wrap, .footer { display: none !important; }
+
+  /* Force results visible */
   #results { display: block !important; }
-  .results-card { box-shadow: none; border: 1px solid #ccc; }
+
+  /* White background */
+  body { background: #ffffff !important; }
+  .wrap { padding: 0 !important; max-width: 100% !important; }
+
+  /* Clean card */
+  .results-card { box-shadow: none !important; border: none !important; margin-top: 0 !important; }
+
+  /* Header */
+  .results-header { padding: 20px 24px 16px !important; border-bottom: 2px solid #264550 !important; }
+  .results-tool-label { font-size: 0.7rem !important; }
+  .results-headline { font-size: 1.25rem !important; color: #000 !important; }
+
+  /* Chart */
+  .chart-section { padding: 20px 24px 24px !important; }
+  .chart-row { margin-bottom: 20px !important; }
+  .chart-dim-name { font-size: 0.8rem !important; }
+  .chart-label { font-size: 0.75rem !important; }
+  .chart-fill { transition: none !important; }
+  .chart-marker { transition: none !important; }
+
+  /* Balanced block */
+  .balanced-block { padding: 12px 24px 16px !important; }
+  .balanced-block.visible { display: block !important; }
+  .balanced-copy { font-size: 0.9375rem !important; }
+
+  /* Force all summaries open */
   .summaries-section { display: block !important; }
-  .summary-card { opacity: 1 !important; transform: none !important; }
+  .summary-card { opacity: 1 !important; transform: none !important; border-top: 1px solid #e0e0e0 !important; }
   .summary-body { display: block !important; }
+  .summary-header { padding: 12px 24px !important; cursor: default !important; }
+  .summary-dim-name { font-size: 0.9375rem !important; }
+  .summary-band-label { font-size: 0.6875rem !important; }
+  .summary-copy { font-size: 0.9375rem !important; line-height: 1.6 !important; }
+  .summary-chevron { display: none !important; }
+
+  /* Print footer: add a visible footer for the printed page */
+  #results::after {
+    content: '\00A9  2026 Arete Advisors. Assessment reflects self-reported perceptions.';
+    display: block;
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid #264550;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6875rem;
+    color: #9ca3af;
+  }
+
+  /* Page settings */
+  @page {
+    margin: 18mm 15mm;
+    size: A4 portrait;
+  }
+
+  /* Prevent awkward page breaks */
+  .chart-section { page-break-inside: avoid; }
+  .summary-card { page-break-inside: avoid; }
+  .results-header { page-break-after: avoid; }
 }
 </style>
 </head>
@@ -707,6 +789,17 @@ body {
 
     <div class="retake-wrap">
       <button class="btn-retake" id="btnRetake">Retake assessment</button>
+    </div>
+
+    <div class="save-wrap">
+      <button class="btn-save" id="btnSave">
+        <svg class="save-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Save your profile
+      </button>
     </div>
 
     <div class="footer">
@@ -1303,6 +1396,12 @@ body {
       elSummariesSection.appendChild(card);
     }
   }
+
+  // ---- SAVE PROFILE ----
+
+  document.getElementById('btnSave').addEventListener('click', function() {
+    window.print();
+  });
 
   // ---- RETAKE ----
 
