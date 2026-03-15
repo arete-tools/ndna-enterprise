@@ -186,6 +186,44 @@ body {
 }
 .intro-meta p + p { margin-top: 12px; }
 
+/* Instructions block (personal profile) */
+.instructions-block {
+  background: var(--white);
+  border-left: 3px solid var(--brand);
+  padding: 32px;
+  border-radius: 3px;
+  margin-bottom: 48px;
+  margin-top: 32px;
+}
+.instructions-section { margin-bottom: 24px; }
+.instructions-section:last-child { margin-bottom: 0; }
+.instructions-label {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.75rem;
+  color: var(--brand);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.instructions-text {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+.instructions-list {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+  padding-left: 20px;
+}
+.instructions-list li { margin-bottom: 6px; }
+.instructions-list li:last-child { margin-bottom: 0; }
+
 /* Response scale preview */
 .scale-preview {
   display: flex;
@@ -615,6 +653,9 @@ body {
   .intro-headline { font-size: 1.5rem; margin-top: 32px; }
   .intro-body { font-size: 1rem; }
   .intro-meta { padding: 24px; margin-bottom: 32px; }
+  .instructions-block { padding: 24px; margin-top: 24px; margin-bottom: 32px; }
+  .instructions-text { font-size: 0.875rem; }
+  .instructions-list { font-size: 0.875rem; }
   .scale-chip { padding: 10px 4px; }
   .scale-chip-num { font-size: 1.1rem; }
   .scale-chip-label { font-size: 0.625rem; }
@@ -736,11 +777,48 @@ body {
   <!-- Intro -->
   <div class="section" id="intro">
     <h1 class="intro-headline">What are your negotiation patterns?</h1>
-    <p class="intro-body">Everyone who negotiates commercially has default patterns. How you prepare, how you handle pressure, how you make concessions, and how you balance the deal against internal stakeholders. This diagnostic maps yours across five dimensions so you can see what your counterparties already see.</p>
-    <div class="intro-meta">
-      <p>Takes about eight minutes. No account, no login, no setup.</p>
-      <p>You get a profile with a dimensional breakdown.</p>
+
+    <div class="instructions-block">
+      <div class="instructions-section">
+        <div class="instructions-label">About this diagnostic</div>
+        <p class="instructions-text">This instrument measures your negotiation tendencies &mdash; how you typically approach commercial discussions. There are no right or wrong answers. Every approach has strengths and limitations.</p>
+      </div>
+
+      <div class="instructions-section">
+        <div class="instructions-label">What counts as a commercial discussion</div>
+        <p class="instructions-text">These questions apply to any discussion where you need to reach agreement with someone whose interests or priorities may differ from yours. This includes conversations with customers, suppliers, internal colleagues, cross-functional partners, or anyone where you are navigating competing priorities to reach a shared outcome.</p>
+      </div>
+
+      <div class="instructions-section">
+        <div class="instructions-label">How to answer</div>
+        <ul class="instructions-list">
+          <li>Answer based on what you actually do, not what your role requires or what your organization expects.</li>
+          <li>Think about your general tendency across discussions, not one specific situation.</li>
+          <li>If the situation described has not occurred, answer based on what you would most likely do.</li>
+        </ul>
+      </div>
+
+      <div class="instructions-section">
+        <div class="instructions-label">Response scale</div>
+        <ul class="instructions-list">
+          <li><strong>Never</strong> &mdash; You cannot recall behaving this way.</li>
+          <li><strong>Rarely</strong> &mdash; This happens occasionally but is not typical for you.</li>
+          <li><strong>Often</strong> &mdash; This is a common pattern for you in most situations.</li>
+          <li><strong>Consistently</strong> &mdash; This is your default approach.</li>
+        </ul>
+      </div>
+
+      <div class="instructions-section">
+        <div class="instructions-label">Confidentiality</div>
+        <p class="instructions-text">Your individual responses are confidential. Results will only be presented at a group level. No individual profiles will be shared in any group setting.</p>
+      </div>
+
+      <div class="instructions-section">
+        <div class="instructions-label">Time</div>
+        <p class="instructions-text">Under 10 minutes.</p>
+      </div>
     </div>
+
     <div>
       <div class="scale-preview-label">Response Scale</div>
       <div class="scale-preview">
@@ -750,6 +828,7 @@ body {
         <div class="scale-chip"><span class="scale-chip-num">4</span><span class="scale-chip-label">Consistently</span></div>
       </div>
     </div>
+
     <button class="btn-start" id="btnStart">Begin Assessment</button>
   </div>
 
@@ -830,10 +909,10 @@ body {
     { id: '5.1', dim: 'D5', text: "Before making commitments to the other party, I check with internal colleagues to confirm I have support for the terms I'm considering." },
     // Round 2
     { id: '1.2', dim: 'D1', text: "When preparation time is limited, I rely on my read of the situation and past experience rather than conducting structured research on the other party." },
-    { id: '2.2', dim: 'D2', text: "My primary focus in any commercial discussion is securing the best possible outcome for my side, rather than looking for ways to expand what's available to both parties." },
+    { id: '2.2', dim: 'D2', text: "In commercial discussions, I spend more time advocating for my position than asking questions about what the other party is trying to achieve." },
     { id: '3.2', dim: 'D3', text: "When a high-stakes discussion becomes heated and the relationship feels at risk, I soften my position on key issues to protect the relationship." },
     { id: '4.2', dim: 'D4', text: "When a discussion loses momentum, I offer a concession to get things moving again, even if the other party hasn't made a comparable move." },
-    { id: '5.2', dim: 'D5', text: "I focus on reaching the best possible agreement with the other party and manage internal buy-in afterward." },
+    { id: '5.2', dim: 'D5', text: "I commit to terms with the other party before confirming that internal stakeholders will support them." },
     // Round 3
     { id: '1.3', dim: 'D1', text: "I test my assumptions about the other party's priorities by seeking information from multiple sources before engaging with them directly." },
     { id: '2.3', dim: 'D2', text: "I invest time understanding what the other party values most, even when it goes beyond the specific terms we're discussing." },
@@ -842,7 +921,7 @@ body {
     { id: '5.3', dim: 'D5', text: "I pause or slow external discussions to make sure internal colleagues are aligned on the direction before I proceed." },
     // Round 4
     { id: '1.4', dim: 'D1', text: "I arrive at important discussions with a specific plan for the sequence of issues I intend to raise and the order in which I'll address them." },
-    { id: '2.4', dim: 'D2', text: "Once I've identified what I need from a commercial discussion, I direct my energy toward getting it rather than exploring what else might be possible." },
+    { id: '2.4', dim: 'D2', text: "Once I've secured the terms I came for, I move to close the discussion rather than exploring whether additional value is available." },
     { id: '3.4', dim: 'D3', text: "When the other party expresses frustration or signals they may walk away, I adjust my approach to reduce the tension, even if it means giving ground on substance." },
     { id: '4.4', dim: 'D4', text: "I offer concessions to build goodwill or trust without tying them explicitly to something I need in return." },
     { id: '5.4', dim: 'D5', text: "I adjust the terms I'm pursuing in real time based on what the other party signals, without checking with internal colleagues first." },
@@ -860,7 +939,7 @@ body {
     { id: '5.6', dim: 'D5', text: "I identify every person who could block or alter the final agreement and engage them before making commitments." },
     // Round 7
     { id: '1.7', dim: 'D1', text: "I prepare for commercial discussions by thinking through scenarios rather than producing written analysis or research." },
-    { id: '2.7', dim: 'D2', text: "When I evaluate a proposed term, I assess what it costs me rather than what it might be worth to the other party." },
+    { id: '2.7', dim: 'D2', text: "When the other party proposes a term, I respond by explaining what does not work for my side rather than asking what makes that term important to them." },
     { id: '3.7', dim: 'D3', text: "When I sense rising tension in a discussion, I move toward agreement faster than I originally planned." },
     { id: '4.7', dim: 'D4', text: "I sometimes concede on multiple issues at once to resolve a complex discussion more quickly." },
     { id: '5.7', dim: 'D5', text: "I move discussions forward based on my own authority rather than confirming decision rights with my internal team." }
